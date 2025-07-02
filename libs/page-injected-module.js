@@ -49,39 +49,18 @@ function getInjectedScriptTag() {
   const ner = await pipeline('token-classification', 'bert-tiny-ner', { quantized: true });
   window.ner = ner;
 
-  // Map LABEL_* tokens from model to human-readable NER groups
-  const labelMap = {
-    'LABEL_1': 'PER',
-    'LABEL_2': 'PER',
-    'LABEL_3': 'ORG',
-    'LABEL_4': 'ORG',
-    'LABEL_5': 'LOC',
-    'LABEL_6': 'LOC',
-    // Add more mappings here if you find more labels in logs
-  };
-
-  // Define which entity groups count as PII for blocking
-  const piiTags = ['PER', 'ORG', 'LOC', 'MISC'];
-
   window.addEventListener('llm-pii-check', async (event) => {
     const { id, text } = event.detail;
     try {
-      // Normalize input text to lowercase for better model consistency
-      const normalizedText = text.toLowerCase();
+      // Pass raw text without lowercasing
+      const inputText = text;
 
-      const result = await ner(normalizedText, { aggregation_strategy: 'simple' });
+      const result = await ner(inputText, { aggregation_strategy: 'simple' });
       console.log('Full NER result:', result);
 
-      // Map raw labels to standard entity groups
-      const mappedEntities = result.map(ent => ({
-        ...ent,
-        entity_group: labelMap[ent.entity] || ent.entity
-      }));
+      // Treat any entity label except 'LABEL_0' with score > 0.5 as PII
+      const sensitiveEntities = result.filter(ent => ent.entity !== 'LABEL_0' && ent.score > 0.5);
 
-      // Filter entities by PII groups with confidence > 0.7
-      const sensitiveEntities = mappedEntities.filter(ent => piiTags.includes(ent.entity_group) && ent.score > 0.7);
-
-      // Flag as PII if any sensitive entities found
       const hasPII = sensitiveEntities.length > 0;
 
       window.dispatchEvent(new CustomEvent('llm-pii-result', { detail: { id, hasPII } }));

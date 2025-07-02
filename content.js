@@ -53,7 +53,11 @@ function showToast(msg) {
 // Visual and functional blocking of input containing sensitive data
 function blockInput(el) {
   el.style.backgroundColor = '#ffcccc';
-  el.value = ''; // Clear sensitive data immediately
+  if (el.isContentEditable) {
+    el.innerText = ''; // Clear sensitive data immediately for contenteditable
+  } else {
+    el.value = '';     // Clear input/textarea
+  }
   el.setCustomValidity?.('Sensitive data detected! Input cleared.');
   showToast('Sensitive data detected! Input cleared.');
 }
@@ -109,7 +113,14 @@ const MIN_INPUT_LENGTH = 6;
 // Debounced input handler to check for sensitive data
 const onInput = debounce(async e => {
   const el = e.target;
-  const val = el.value.trim();
+
+  // Get text depending on input type
+  let val;
+  if (el.isContentEditable) {
+    val = el.innerText.trim();  // Get plain text from contenteditable
+  } else {
+    val = el.value.trim();       // Normal input/textarea
+  }
 
   if (val.length < MIN_INPUT_LENGTH) {
     clearBlock(el);
@@ -132,7 +143,7 @@ const onInput = debounce(async e => {
 
 // Recursively attach input listeners inside shadow roots (important for sites like Google)
 function addListenersToShadowInputs(root = document, onInputCallback) {
-  const inputs = root.querySelectorAll('input[type="text"], textarea');
+  const inputs = root.querySelectorAll('input[type="text"], textarea, [contenteditable="true"]');
   inputs.forEach(input => input.addEventListener('input', onInputCallback));
 
   const elements = root.querySelectorAll('*');
@@ -148,7 +159,7 @@ async function main() {
   // Global listener for normal DOM inputs
   document.addEventListener('input', e => {
     const el = e.target;
-    if ((el.tagName === 'INPUT' && el.type === 'text') || el.tagName === 'TEXTAREA') {
+    if ((el.tagName === 'INPUT' && el.type === 'text') || el.tagName === 'TEXTAREA' || el.isContentEditable) {
       onInput(e);
     }
   });
