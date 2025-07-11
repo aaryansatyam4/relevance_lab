@@ -19,8 +19,25 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       try {
         const model = await loadModel();
         const result = await model(message.text, { aggregation_strategy: 'simple' });
-        const piiTags = ['PER', 'ORG', 'LOC', 'MISC'];
-        const hasPII = result.some(ent => piiTags.includes(ent.entity_group));
+
+        // Common PII entity groups from BERT model
+        const piiTags = ['PER', 'ORG', 'LOC', 'MISC', 'DATE', 'NOC'];
+        let hasPII = result.some(ent => piiTags.includes(ent.entity_group));
+
+        // Additional keyword-based checks for general PII that BERT might miss
+        const lowerText = message.text.toLowerCase();
+        const additionalPiiKeywords = [
+          'my full name is', 'i live at', 'my date of birth is', 'my mother\'s maiden name is',
+          'my current location is', 'my medical condition is', 'my office password is',
+          'my personal password is', 'my system password is', 'my database password is',
+          'my server password is', 'my secret phrase is', 'my secret is'
+        ];
+        const containsAdditionalPii = additionalPiiKeywords.some(keyword => lowerText.includes(keyword));
+
+        if (containsAdditionalPii) {
+          hasPII = true; // Override if additional PII keywords are found
+        }
+
         sendResponse({ pii: hasPII });
       } catch (e) {
         console.error('NER inference error:', e);
