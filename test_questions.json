@@ -1,12 +1,12 @@
 [
   {
     "id": 1,
-    "text": "My office password is asdafsa.",
+    "text": "My office password is asdafsa. My email is test@example.com.",
     "expected_detection": true
   },
   {
     "id": 2,
-    "text": "My email address is jane.doe@example.com.",
+    "text": "My name is John Doe.",
     "expected_detection": true
   },
   {
@@ -16,7 +16,7 @@
   },
   {
     "id": 4,
-    "text": "Please call me at 555-123-4567.",
+    "text": "My address is 123 Main St, Anytown, CA 90210.",
     "expected_detection": true
   },
   {
@@ -26,67 +26,67 @@
   },
   {
     "id": 6,
-    "text": "AWS Key: AKIAIOSFODNN7EXAMPLE.",
+    "text": "Please call me at 555-123-4567.",
     "expected_detection": true
   },
   {
     "id": 7,
-    "text": "Google API Key: AIzaSyA_B_C_D_E_F_G_H_I_J_K_L_M_N_O_P_Q_R_S_T_U_V_W_X_Y_Z.",
+    "text": "AWS Key: AKIAIOSFODNN7EXAMPLE.",
     "expected_detection": true
   },
   {
     "id": 8,
-    "text": "Secret key: sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.",
+    "text": "My secret phrase is 'open sesame'.",
     "expected_detection": true
   },
   {
     "id": 9,
-    "text": "Here is a 32-character hash: 0123456789abcdef0123456789abcdef.",
+    "text": "Google API Key: AIzaSyA_B_C_D_E_F_G_H_I_J_K_L_M_N_O_P_Q_R_S_T_U_V_W_X_Y_Z.",
     "expected_detection": true
   },
   {
     "id": 10,
-    "text": "This is a 40-character token: 0123456789abcdef0123456789abcdef01234567.",
+    "text": "Secret key: sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.",
     "expected_detection": true
   },
   {
     "id": 11,
-    "text": "A 64-character string: 0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef.",
+    "text": "Here is a 32-character hash: 0123456789abcdef0123456789abcdef.",
     "expected_detection": true
   },
   {
     "id": 12,
-    "text": "My API key is ABCDEFGHIJKLMNOP.",
+    "text": "My birthdate is 01/01/1990.",
     "expected_detection": true
   },
   {
     "id": 13,
-    "text": "My secret_key is XYZ123ABC456DEF789.",
+    "text": "This is a 40-character token: 0123456789abcdef0123456789abcdef01234567.",
     "expected_detection": true
   },
   {
     "id": 14,
-    "text": "Access token: QWERTYUIOPASDFGHJKL.",
+    "text": "A 64-character string: 0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef.",
     "expected_detection": true
   },
   {
     "id": 15,
-    "text": "My full name is Robert Smith.",
+    "text": "My API key is ABCDEFGHIJKLMNOP.",
     "expected_detection": true
   },
   {
     "id": 16,
-    "text": "I live at 789 Oak Avenue, Anytown, CA 90210.",
+    "text": "My medical record number is MRN-007-XYZ.",
     "expected_detection": true
   },
   {
     "id": 17,
-    "text": "My date of birth is 05/20/1990.",
+    "text": "My secret_key is XYZ123ABC456DEF789.",
     "expected_detection": true
   },
   {
     "id": 18,
-    "text": "My medical record number is MRN-007-XYZ.",
+    "text": "Access token: QWERTYUIOPASDFGHJKL.",
     "expected_detection": true
   },
   {
@@ -498,5 +498,505 @@
     "id": 100,
     "text": "My employee ID is E0001. Token: UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU. API_KEY = 'VVVVVVVVVVVVVVVVVVVV'.",
     "expected_detection": true
+  },
+  {
+    "id": 101,
+    "text": "The quick brown fox jumps over the lazy dog.",
+    "expected_detection": false
+  },
+  {
+    "id": 102,
+    "text": "What time is it right now?",
+    "expected_detection": false
+  },
+  {
+    "id": 103,
+    "text": "I enjoy reading books in the evening.",
+    "expected_detection": false
+  },
+  {
+    "id": 104,
+    "text": "The weather today is sunny and warm.",
+    "expected_detection": false
+  },
+  {
+    "id": 105,
+    "text": "Please tell me a joke.",
+    "expected_detection": false
+  },
+  {
+    "id": 106,
+    "text": "The capital of France is Paris.",
+    "expected_detection": false
+  },
+  {
+    "id": 107,
+    "text": "I like to listen to music.",
+    "expected_detection": false
+  },
+  {
+    "id": 108,
+    "text": "This is a simple sentence.",
+    "expected_detection": false
+  },
+  {
+    "id": 109,
+    "text": "Birds can fly high in the sky.",
+    "expected_detection": false
+  },
+  {
+    "id": 110,
+    "text": "Water is essential for life.",
+    "expected_detection": false
+  },
+  {
+    "id": 111,
+    "text": "The dog barks loudly at strangers.",
+    "expected_detection": false
+  },
+  {
+    "id": 112,
+    "text": "I am going to the store to buy groceries.",
+    "expected_detection": false
+  },
+  {
+    "id": 113,
+    "text": "The moon is far away from Earth.",
+    "expected_detection": false
+  },
+  {
+    "id": 114,
+    "text": "I enjoy hiking in the mountains.",
+    "expected_detection": false
+  },
+  {
+    "id": 115,
+    "text": "The flowers are blooming beautifully.",
+    "expected_detection": false
+  },
+  {
+    "id": 116,
+    "text": "I love to travel to new places.",
+    "expected_detection": false
+  },
+  {
+    "id": 117,
+    "text": "The computer is on the desk.",
+    "expected_detection": false
+  },
+  {
+    "id": 118,
+    "text": "The book is on the table.",
+    "expected_detection": false
+  },
+  {
+    "id": 119,
+    "text": "I like to paint landscapes.",
+    "expected_detection": false
+  },
+  {
+    "id": 120,
+    "text": "The train is fast and efficient.",
+    "expected_detection": false
+  },
+  {
+    "id": 121,
+    "text": "I am going to the gym for a workout.",
+    "expected_detection": false
+  },
+  {
+    "id": 122,
+    "text": "The grass is green and lush.",
+    "expected_detection": false
+  },
+  {
+    "id": 123,
+    "text": "I enjoy playing sports with friends.",
+    "expected_detection": false
+  },
+  {
+    "id": 124,
+    "text": "The car is red and shiny.",
+    "expected_detection": false
+  },
+  {
+    "id": 125,
+    "text": "I am watching a movie tonight.",
+    "expected_detection": false
+  },
+  {
+    "id": 126,
+    "text": "The tree is tall and old.",
+    "expected_detection": false
+  },
+  {
+    "id": 127,
+    "text": "I am eating dinner with my family.",
+    "expected_detection": false
+  },
+  {
+    "id": 128,
+    "text": "The house is big and spacious.",
+    "expected_detection": false
+  },
+  {
+    "id": 129,
+    "text": "I am going to sleep early tonight.",
+    "expected_detection": false
+  },
+  {
+    "id": 130,
+    "text": "The dog is cute and playful.",
+    "expected_detection": false
+  },
+  {
+    "id": 131,
+    "text": "I am reading a novel.",
+    "expected_detection": false
+  },
+  {
+    "id": 132,
+    "text": "The sky is clear and blue.",
+    "expected_detection": false
+  },
+  {
+    "id": 133,
+    "text": "I am listening to a podcast.",
+    "expected_detection": false
+  },
+  {
+    "id": 134,
+    "text": "The bird is singing a beautiful song.",
+    "expected_detection": false
+  },
+  {
+    "id": 135,
+    "text": "I am writing some code.",
+    "expected_detection": false
+  },
+  {
+    "id": 136,
+    "text": "The cat is sleeping peacefully.",
+    "expected_detection": false
+  },
+  {
+    "id": 137,
+    "text": "I am going for a walk in the park.",
+    "expected_detection": false
+  },
+  {
+    "id": 138,
+    "text": "The sun is setting in the west.",
+    "expected_detection": false
+  },
+  {
+    "id": 139,
+    "text": "I am playing a video game.",
+    "expected_detection": false
+  },
+  {
+    "id": 140,
+    "text": "The food is delicious.",
+    "expected_detection": false
+  },
+  {
+    "id": 141,
+    "text": "How are you doing today?",
+    "expected_detection": false
+  },
+  {
+    "id": 142,
+    "text": "What is your favorite color?",
+    "expected_detection": false
+  },
+  {
+    "id": 143,
+    "text": "Tell me about your day.",
+    "expected_detection": false
+  },
+  {
+    "id": 144,
+    "text": "I need to relax.",
+    "expected_detection": false
+  },
+  {
+    "id": 145,
+    "text": "The weather forecast is for rain.",
+    "expected_detection": false
+  },
+  {
+    "id": 146,
+    "text": "I am learning a new language.",
+    "expected_detection": false
+  },
+  {
+    "id": 147,
+    "text": "The concert was amazing.",
+    "expected_detection": false
+  },
+  {
+    "id": 148,
+    "text": "I like to cook pasta.",
+    "expected_detection": false
+  },
+  {
+    "id": 149,
+    "text": "The movie was very entertaining.",
+    "expected_detection": false
+  },
+  {
+    "id": 150,
+    "text": "I am planning my next vacation.",
+    "expected_detection": false
+  },
+  {
+    "id": 151,
+    "text": "The coffee tastes great.",
+    "expected_detection": false
+  },
+  {
+    "id": 152,
+    "text": "I enjoy spending time outdoors.",
+    "expected_detection": false
+  },
+  {
+    "id": 153,
+    "text": "The music is very calming.",
+    "expected_detection": false
+  },
+  {
+    "id": 154,
+    "text": "I need to buy some new shoes.",
+    "expected_detection": false
+  },
+  {
+    "id": 155,
+    "text": "The art exhibition was inspiring.",
+    "expected_detection": false
+  },
+  {
+    "id": 156,
+    "text": "I like to draw and sketch.",
+    "expected_detection": false
+  },
+  {
+    "id": 157,
+    "text": "The city lights are beautiful at night.",
+    "expected_detection": false
+  },
+  {
+    "id": 158,
+    "text": "I am going to visit my friends.",
+    "expected_detection": false
+  },
+  {
+    "id": 159,
+    "text": "The sunset was breathtaking.",
+    "expected_detection": false
+  },
+  {
+    "id": 160,
+    "text": "I am excited about the weekend.",
+    "expected_detection": false
+  },
+  {
+    "id": 161,
+    "text": "The park is a nice place for a picnic.",
+    "expected_detection": false
+  },
+  {
+    "id": 162,
+    "text": "I prefer tea over coffee.",
+    "expected_detection": false
+  },
+  {
+    "id": 163,
+    "text": "The news is on television.",
+    "expected_detection": false
+  },
+  {
+    "id": 164,
+    "text": "I am working on a new project.",
+    "expected_detection": false
+  },
+  {
+    "id": 165,
+    "text": "The book has a compelling plot.",
+    "expected_detection": false
+  },
+  {
+    "id": 166,
+    "text": "I like to explore new recipes.",
+    "expected_detection": false
+  },
+  {
+    "id": 167,
+    "text": "The performance was outstanding.",
+    "expected_detection": false
+  },
+  {
+    "id": 168,
+    "text": "I am looking forward to the holidays.",
+    "expected_detection": false
+  },
+  {
+    "id": 169,
+    "text": "The ocean waves are soothing.",
+    "expected_detection": false
+  },
+  {
+    "id": 170,
+    "text": "I enjoy long walks on the beach.",
+    "expected_detection": false
+  },
+  {
+    "id": 171,
+    "text": "The museum has interesting exhibits.",
+    "expected_detection": false
+  },
+  {
+    "id": 172,
+    "text": "I like to learn about history.",
+    "expected_detection": false
+  },
+  {
+    "id": 173,
+    "text": "The mountain view is spectacular.",
+    "expected_detection": false
+  },
+  {
+    "id": 174,
+    "text": "I am planning a road trip.",
+    "expected_detection": false
+  },
+  {
+    "id": 175,
+    "text": "The garden is full of colorful flowers.",
+    "expected_detection": false
+  },
+  {
+    "id": 176,
+    "text": "I love to try new cuisines.",
+    "expected_detection": false
+  },
+  {
+    "id": 177,
+    "text": "The theater play was captivating.",
+    "expected_detection": false
+  },
+  {
+    "id": 178,
+    "text": "I am going to a party tonight.",
+    "expected_detection": false
+  },
+  {
+    "id": 179,
+    "text": "The stars are bright in the night sky.",
+    "expected_detection": false
+  },
+  {
+    "id": 180,
+    "text": "I enjoy stargazing.",
+    "expected_detection": false
+  },
+  {
+    "id": 181,
+    "text": "The concert hall has great acoustics.",
+    "expected_detection": false
+  },
+  {
+    "id": 182,
+    "text": "I like to attend live music events.",
+    "expected_detection": false
+  },
+  {
+    "id": 183,
+    "text": "The art gallery features modern art.",
+    "expected_detection": false
+  },
+  {
+    "id": 184,
+    "text": "I am learning to play the guitar.",
+    "expected_detection": false
+  },
+  {
+    "id": 185,
+    "text": "The river flows gently.",
+    "expected_detection": false
+  },
+  {
+    "id": 186,
+    "text": "I enjoy fishing in the river.",
+    "expected_detection": false
+  },
+  {
+    "id": 187,
+    "text": "The forest is dense and green.",
+    "expected_detection": false
+  },
+  {
+    "id": 188,
+    "text": "I like to go camping in the forest.",
+    "expected_detection": false
+  },
+  {
+    "id": 189,
+    "text": "The desert landscape is unique.",
+    "expected_detection": false
+  },
+  {
+    "id": 190,
+    "text": "I enjoy exploring desert trails.",
+    "expected_detection": false
+  },
+  {
+    "id": 191,
+    "text": "The waterfall is majestic.",
+    "expected_detection": false
+  },
+  {
+    "id": 192,
+    "text": "I like to visit waterfalls.",
+    "expected_detection": false
+  },
+  {
+    "id": 193,
+    "text": "The bridge spans across the river.",
+    "expected_detection": false
+  },
+  {
+    "id": 194,
+    "text": "I enjoy walking across old bridges.",
+    "expected_detection": false
+  },
+  {
+    "id": 195,
+    "text": "The castle is ancient and historic.",
+    "expected_detection": false
+  },
+  {
+    "id": 196,
+    "text": "I like to tour historical castles.",
+    "expected_detection": false
+  },
+  {
+    "id": 197,
+    "text": "The city skyline is impressive.",
+    "expected_detection": false
+  },
+  {
+    "id": 198,
+    "text": "I enjoy viewing city skylines.",
+    "expected_detection": false
+  },
+  {
+    "id": 199,
+    "text": "The lighthouse stands tall by the sea.",
+    "expected_detection": false
+  },
+  {
+    "id": 200,
+    "text": "I like to visit lighthouses.",
+    "expected_detection": false
   }
 ]

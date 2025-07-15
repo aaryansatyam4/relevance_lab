@@ -35,7 +35,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         const containsAdditionalPii = additionalPiiKeywords.some(keyword => lowerText.includes(keyword));
 
         if (containsAdditionalPii) {
-          hasPII = true; // Override if additional PII keywords are found
+          hasPII = true; 
         }
 
         sendResponse({ pii: hasPII });

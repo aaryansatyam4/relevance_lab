@@ -49,24 +49,33 @@ function getInjectedScriptTag() {
   const ner = await pipeline('token-classification', 'bert-tiny-ner', { quantized: true });
   window.ner = ner;
 
+  let lastText = '';
+  let lastResult = false;
+
   window.addEventListener('llm-pii-check', async (event) => {
     const { id, text } = event.detail;
-    try {
-      // Pass raw text without lowercasing
-      const inputText = text;
+    
+    // Avoid re-processing if text hasn't changed significantly
+    if (text === lastText) {
+      window.dispatchEvent(new CustomEvent('llm-pii-result', { detail: { id, hasPII: lastResult } }));
+      return;
+    }
 
-      const result = await ner(inputText, { aggregation_strategy: 'simple' });
+    try {
+      const result = await ner(text, { aggregation_strategy: 'simple' });
       console.log('Full NER result:', result);
 
       // Treat any entity label except 'LABEL_0' with score > 0.5 as PII
-      const sensitiveEntities = result.filter(ent => ent.entity !== 'LABEL_0' && ent.score > 0.5);
-
-      const hasPII = sensitiveEntities.length > 0;
+      const hasPII = result.some(ent => ent.entity !== 'LABEL_0' && ent.score > 0.5);
+      
+      lastText = text;
+      lastResult = hasPII;
 
       window.dispatchEvent(new CustomEvent('llm-pii-result', { detail: { id, hasPII } }));
     } catch (e) {
       console.error('NER error:', e);
-      window.dispatchEvent(new CustomEvent('llm-pii-result', { detail: { id, hasPII: false } }));
+      // Fallback to previous result on error to avoid flickering
+      window.dispatchEvent(new CustomEvent('llm-pii-result', { detail: { id, hasPII: lastResult } }));
     }
   });
 })();

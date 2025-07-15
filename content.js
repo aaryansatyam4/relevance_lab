@@ -141,31 +141,49 @@ const onInput = debounce(async e => {
   }
 }, 700);
 
-// Recursively attach input listeners inside shadow roots (important for sites like Google)
-function addListenersToShadowInputs(root = document, onInputCallback) {
-  const inputs = root.querySelectorAll('input[type="text"], textarea, [contenteditable="true"]');
-  inputs.forEach(input => input.addEventListener('input', onInputCallback));
+// Attaches listener to an element if it's a valid input target.
+function attachListenerToInput(element) {
+  if (element.nodeType !== Node.ELEMENT_NODE) return;
 
-  const elements = root.querySelectorAll('*');
-  elements.forEach(el => {
-    if (el.shadowRoot) {
-      addListenersToShadowInputs(el.shadowRoot, onInputCallback);
+  const targets = element.matches('input[type="text"], textarea, [contenteditable="true"]')
+    ? [element]
+    : element.querySelectorAll('input[type="text"], textarea, [contenteditable="true"]');
+
+  targets.forEach(node => {
+    if (!node.dataset.llmMonitorAttached) {
+      node.addEventListener('input', onInput);
+      node.dataset.llmMonitorAttached = 'true';
     }
   });
 }
 
-// Main function to initialize event listeners
-async function main() {
-  // Global listener for normal DOM inputs
-  document.addEventListener('input', e => {
-    const el = e.target;
-    if ((el.tagName === 'INPUT' && el.type === 'text') || el.tagName === 'TEXTAREA' || el.isContentEditable) {
-      onInput(e);
+// Use MutationObserver to detect dynamically added inputs
+function startMonitoring() {
+  // Initial scan of the document
+  attachListenerToInput(document.body);
+
+  const observer = new MutationObserver((mutations) => {
+    for (const mutation of mutations) {
+      for (const node of mutation.addedNodes) {
+        attachListenerToInput(node);
+        // Check for shadow roots in newly added elements
+        if (node.nodeType === Node.ELEMENT_NODE) {
+          node.querySelectorAll('*').forEach(el => {
+            if (el.shadowRoot) {
+              attachListenerToInput(el.shadowRoot);
+            }
+          });
+        }
+      }
     }
   });
 
-  // Add listeners inside shadow DOMs too
-  addListenersToShadowInputs(document, onInput);
+  observer.observe(document.body, {
+    childList: true,
+    subtree: true,
+  });
+
+  console.log("LLM Data Leakage Monitor is now actively monitoring for dynamic input fields.");
 }
 
-main().catch(console.error);
+startMonitoring();
